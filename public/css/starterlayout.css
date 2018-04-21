@@ -1,0 +1,21 @@
+#content {
+    position:absolute;
+    top:50%;
+    left:31%;
+    margin-top:-50px;
+    margin-left:-50px;
+}
+
+#search-field {
+    left:6%;
+}
+#login-button {
+    position:absolute;
+    top:115%;
+    left:97%;
+    margin-top:-50px;
+    margin-left:-50px;
+}
+body {
+    overflow: scroll;
+}
