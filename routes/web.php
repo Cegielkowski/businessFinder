@@ -14,10 +14,14 @@
 Route::get('/', function () {
     return view('index');
 });
-
+Route::get('company/searchCompany/{data}', 'CompanyController@searchCompany');
+Route::resource('User', 'UserController');
 Route::resource('company', 'CompanyController');
-Route::resource('category', 'CategoryController');
 Route::delete('/{id}', 'CompanyController@destroy');
-Route::get('company/search', 'CompanyController@search');
 
 
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -1,5 +1,7 @@
-@include('companies.header')
-
+@include('header')
+@guest
+    @include('denied')
+@else
             <h1>Edit {{ $company->title }}</h1>
 
             <!-- if there are creation errors, they will show here -->
@@ -12,5 +14,5 @@
                 {{ Form::submit('Edit the Company!', array('class' => 'btn btn-primary')) }}
 
             {{ Form::close() }}
-
+@endguest
 @include('footer')

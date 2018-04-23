@@ -1,5 +1,4 @@
-@include('companies.header')
-
+@include('header')
         <h1>Showing {{ $company->title }}</h1>
 
             <div class="jumbotron text-center">
@@ -16,5 +15,4 @@
                     <strong>Adress:</strong> {{ $company->adress }}<br>
                   </p>
             </div>
-
 @include('footer')

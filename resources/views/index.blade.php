@@ -11,9 +11,9 @@
     </thead>
     <tbody>
         <div id="content">
-        <h1>Search for the company that you want</h1>
-        <div class="row">
-                <div class="col-lg-6" id="search-field">
+            <h1 id="search-text">Search for the company that you want</h1>
+            <div class="row">
+                <div class="col-md-12" id="search-field">
                     <div class="input-group">
                     <input type="text" class="form-control" id="search-content"placeholder="Search for...">
                     <span class="input-group-btn">
@@ -21,6 +21,10 @@
                     </span>
                     </div>
                 </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="table"></div>
             </div>
         </div>
     </tbody>

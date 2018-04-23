@@ -1,5 +1,7 @@
-@include('companies.header')
-
+@include('header')
+@guest
+    @include('denied')
+@else
 <h1>All the Companies</h1>
 
 <!-- will be used to show any messages -->
@@ -28,9 +30,6 @@
             <td>{{ $value->zip_code }}</td>
             <td>{{ $value->city }}</td>
             <td>{{ $value->category }}</td>
-            
-
-            <!-- we will also add show, edit, and delete buttons -->
             <td>
                 {{ Form::open(array('url' => 'company/' . $value->id)) }}
                     
@@ -49,5 +48,5 @@
     @endforeach
     </tbody>
 </table>
-
+@endguest
 @include('footer')

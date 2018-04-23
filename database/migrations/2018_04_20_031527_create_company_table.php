@@ -22,7 +22,7 @@ class CreateCompanyTable extends Migration
             $table->string('zip_code', 20);
             $table->string('city', 40);
             $table->string('state', 20);
-            $table->string('description', 20);
+            $table->string('description', 100);
             $table->string('category', 11);
             $table->softDeletes();
             $table->uuid('uuid');

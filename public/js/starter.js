@@ -2,15 +2,19 @@ $("#go-button").click(function() {
     let searchContent = $("#search-content").val();
     switch (searchContent == '') {
         case true:
-            toastr.warning('O campo de pesquisa é obrigatório');
+            toastr.warning('the search field can not be empty ');
             break;
         case false:
             $.ajax({
                 type: 'get',
-                data: searchContent,
-                url: '/company/searchCompany',
-                success: function(dados) {
-                    console.log(dados);
+                url: 'company/searchCompany/' + searchContent,
+                success: function(data) {
+                    let result = JSON.parse(data);
+                    if (result.status) {
+                        $("#table").html(result.table);
+                    } else {
+                        toastr.warning('Nothing found!');
+                    }
                 }
             });
             break;
@@ -18,6 +22,5 @@ $("#go-button").click(function() {
             toastr.error('Something went worng. Please reload the page');
             break;
     }
-
 
 });

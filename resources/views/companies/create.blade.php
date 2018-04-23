@@ -1,5 +1,7 @@
-@include('companies.header')
-
+@include('header')
+@guest
+    @include('denied')
+@else
         <h1>Create a Company</h1>
 
         <!-- if there are creation errors, they will show here -->
@@ -12,5 +14,5 @@
             {{ Form::submit('Create the Company!', array('class' => 'btn btn-primary')) }}
 
         {{ Form::close() }}
-
+@endguest
 @include('footer')

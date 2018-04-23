@@ -180,13 +180,64 @@ class CompanyController extends Controller
         
     }
 
-    public function searchCompany( string $content ) : json
+    public function searchCompany( string $content ) : string
     {
-       $search =  Company::where('title', 'like', '%' . $content . '%')
-                    ->orWhere('adress', 'like', '%' . $content . '%')
-                    ->orWhere('zip_code', 'like', '%' . $content . '%')
-                    ->orWhere('city', 'like', '%' . $content . '%')
-                    ->orWhere('category', 'like', '%' . $content . '%')->get();
-        dd($search);
+        $ret = [
+			'status' => false,
+			'mensagem' => 'erro_generico'
+        ];
+        
+ 		try {
+            $companies =  Company::where('title', 'like', '%' . $content . '%')
+                                ->orWhere('adress', 'like', '%' . $content . '%')
+                                ->orWhere('zip_code', 'like', '%' . $content . '%')
+                                ->orWhere('city', 'like', '%' . $content . '%')
+                                ->orWhere('category', 'like', '%' . $content . '%')->get();
+            
+            if ( !empty($companies[0]->id) ) {
+                $baseUrl = url('/');
+                $tr = false;
+                foreach( $companies as $company ) {
+                    $tr .= "
+                            <tr>
+                            <td>$company->id</td>
+                            <td>$company->title</td>
+                            <td>$company->adress</td>
+                            <td>$company->zip_code</td>
+                            <td>$company->city</td>
+                            <td>$company->category</td>
+                            <td><a class='btn btn-small btn-success' href='$baseUrl/company/$company->id'>Show</a></td>
+                            </tr>
+                    ";
+                } 
+                
+                $table ="
+                    <table class='table table-striped'>
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Adress</th>
+                            <th>Zip code</th>
+                            <th>City</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        $tr
+                        </tbody>
+                    </table> ";
+
+				$ret = ['status' => true, 'mensagem' => '', 'table' => $table];
+			}
+		} catch(Exception $e) {
+			$ret = [
+				'status' => false,
+				'mensagem' => $e->getMessage()
+			];
+		}
+		return json_encode($ret, JSON_NUMERIC_CHECK);
+
     }
 }
